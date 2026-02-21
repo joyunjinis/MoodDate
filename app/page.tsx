@@ -25,6 +25,7 @@ export default function Home() {
       return toast.error("비밀번호를 입력하세요");
     } else {
       toast.success("MoodMate에 오신걸 환영합니다");
+      setTimeout(() => router.push("/connect"), 1500);
     }
   };
 
@@ -82,6 +83,12 @@ export default function Home() {
             onChange={(e) => setPassword(e.target.value)}
             type={showPassword ? "text" : "password"}
             placeholder="비밀번호를 입력하세요"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleLogIn();
+              }
+            }}
             className="w-75 border-[#7A5CFF] hover:border-[#FF6B81]"
           />
           <button
