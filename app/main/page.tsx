@@ -2,8 +2,16 @@
 
 import EmotionSelect from "@/components/main/EmotionSelect";
 import EmotionBox from "@/components/main/EmotionBox";
+import { useEffect, useState } from "react";
 
 export default function MainPage() {
+  const [myGender, setMyGender] = useState<string | null>(null);
+
+  useEffect(() => {
+    const gender = localStorage.getItem("gender");
+    setMyGender(gender);
+  }, []);
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <h1 className="text-4xl text-[#8B8B8B] font-bold">

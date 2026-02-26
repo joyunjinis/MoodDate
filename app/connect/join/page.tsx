@@ -4,10 +4,22 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import OtpInput from "@/components/ui/OtpInput";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export default function Join() {
   const router = useRouter();
   const [code, setCode] = useState("");
+
+  const handleJoin = () => {
+    const myCode = localStorage.getItem("myCode");
+
+    if (code === myCode) {
+      toast.success("커플 연결 완료되었습니다!");
+      router.push("/main");
+    } else {
+      toast.error("코드가 올바르지 않습니다.");
+    }
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
@@ -19,7 +31,7 @@ export default function Join() {
         <OtpInput value={code} onChange={setCode} />
         <Button
           className="text-[#FAFAFA] text-[15px] font-bold  hover:bg-[#FF6B81] bg-[#7A5CFF] mt-2 w-80"
-          onClick={() => router.push("/main")}
+          onClick={handleJoin}
         >
           MoodDate와 시작해볼까요?
         </Button>

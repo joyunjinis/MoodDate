@@ -13,6 +13,7 @@ export default function Create() {
   const handleCreateCode = () => {
     const newCode = generateInviteCode();
     setMyCode(newCode);
+    localStorage.setItem("mycode", myCode);
     toast.success("초대코드가 생성되었습니다.");
   };
 

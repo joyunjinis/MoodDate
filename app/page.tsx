@@ -23,10 +23,19 @@ export default function Home() {
     }
     if (!password) {
       return toast.error("비밀번호를 입력하세요");
-    } else {
-      toast.success("MoodMate에 오신걸 환영합니다");
-      setTimeout(() => router.push("/connect"), 1500);
     }
+
+    const saveEmail = localStorage.getItem("email");
+    if (email !== saveEmail) {
+      return toast.error("이메일이 일치하지 않습니다.");
+    }
+
+    const savePassword = localStorage.getItem("password");
+    if (password !== savePassword) {
+      return toast.error("비밀번호가 일치하지 않습니다.");
+    }
+    toast.success("MoodMate에 오신걸 환영합니다");
+    setTimeout(() => router.push("/connect"), 1500);
   };
 
   return (

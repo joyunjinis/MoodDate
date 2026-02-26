@@ -35,6 +35,10 @@ export default function SignUp() {
     if (!gender) {
       return toast.error("성별을 선택해주세요");
     } else {
+      localStorage.setItem("name", name);
+      localStorage.setItem("email", email);
+      localStorage.setItem("password", password);
+      localStorage.setItem("gender", gender);
       toast.success("회원가입이 완료되었습니다");
       setTimeout(() => router.push("/"), 1500);
     }
