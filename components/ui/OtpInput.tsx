@@ -30,10 +30,9 @@ export default function OtpInput({ length = 6, value, onChange }: Props) {
       next[idx] = "";
       onChange(next.join(""));
       return;
-
-      next[idx] = cleaned[0];
-      onChange(next.join(""));
     }
+    next[idx] = cleaned[0];
+    onChange(next.join(""));
     if (idx < length - 1) focusIndex(idx + 1);
   };
 
@@ -53,6 +52,7 @@ export default function OtpInput({ length = 6, value, onChange }: Props) {
     <div className="flex gap-2 mt-4">
       {values.map((digit, idx) => (
         <Input
+          type="text"
           key={idx}
           ref={(el) => {
             inputsRef.current[idx] = el;
