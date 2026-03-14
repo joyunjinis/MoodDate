@@ -6,7 +6,17 @@ import { Button } from "@/components/ui/button";
 
 export default function AnniversaryInput() {
   const router = useRouter();
-  const [anniversary, setAnniversary] = useState("");
+  const [anniversary, setAnniversary] = useState<string>("");
+  const [myBirthday, setMyBirthday] = useState<string>("");
+  const [partnerBirthday, setPartnerBirthday] = useState<string>("");
+
+  const handleSave = () => {
+    if (anniversary) {
+      localStorage.setItem("anniversary", anniversary);
+      localStorage.setItem("myBirthday", myBirthday);
+      localStorage.setItem("partnerBirthday", partnerBirthday);
+    }
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
@@ -29,8 +39,8 @@ export default function AnniversaryInput() {
           </p>
           <Input
             type="date"
-            value={anniversary}
-            onChange={(e) => setAnniversary(e.target.value)}
+            value={myBirthday}
+            onChange={(e) => setMyBirthday(e.target.value)}
             className="w-full pr-10 border-[#7A5CFF] hover:border-[#FF6B81]"
           />
           <p className="text-[#2D2D2D] font-bold text-[16px] mt-2 ">
@@ -38,13 +48,16 @@ export default function AnniversaryInput() {
           </p>
           <Input
             type="date"
-            value={anniversary}
-            onChange={(e) => setAnniversary(e.target.value)}
+            value={partnerBirthday}
+            onChange={(e) => setPartnerBirthday(e.target.value)}
             className="w-full pr-10 border-[#7A5CFF] hover:border-[#FF6B81]"
           />
           <Button
             className="text-[#FAFAFA] text-[15px] font-bold  hover:bg-[#FF6B81] bg-[#7A5CFF] mt-2 w-full"
-            onClick={() => router.push("/main")}
+            onClick={() => {
+              handleSave();
+              router.push("/main");
+            }}
           >
             MoodDate와 시작해볼까요?
           </Button>

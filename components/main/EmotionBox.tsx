@@ -4,12 +4,14 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { ReactNode, useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type Props = {
   children: ReactNode;
 };
 
 export default function EmotionBox({ children }: Props) {
+  const router = useRouter();
   const [myGender, setMyGender] = useState<string>("");
 
   useEffect(() => {
@@ -20,6 +22,7 @@ export default function EmotionBox({ children }: Props) {
 
   const handleShareEmotion = () => {
     toast.success("감정 공유가 완료되었어요!");
+    router.push("/main/plan");
   };
 
   return (
