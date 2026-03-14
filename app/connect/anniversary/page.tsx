@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import DateSelectPage from "@/components/planner/DateSelect";
+import DateSelectPage from "@/components/main/DateSelect";
 
 export default function AnniversaryInput() {
   const router = useRouter();

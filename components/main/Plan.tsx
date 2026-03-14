@@ -1,6 +1,6 @@
 "use client";
 
-import DateSelectPage from "../planner/DateSelect";
+import DateSelectPage from "./DateSelect";
 import AddPlacePage from "../planner/AddPlace";
 import { useEffect, useState } from "react";
 import CardListPage from "../planner/CardList";

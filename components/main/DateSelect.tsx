@@ -20,7 +20,14 @@ export default function DateSelectPage({ date, onSelect }: Props) {
             </Button>
           </PopoverTrigger>
           <PopoverContent>
-            <Calendar mode="single" selected={date} onSelect={onSelect} />
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={onSelect}
+              captionLayout="dropdown"
+              fromYear={1900}
+              toYear={2030}
+            />
           </PopoverContent>
         </Popover>
       </div>
