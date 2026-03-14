@@ -1,20 +1,26 @@
 "use client";
+
 import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import DateSelectPage from "@/components/planner/DateSelect";
 
 export default function AnniversaryInput() {
   const router = useRouter();
-  const [anniversary, setAnniversary] = useState<string>("");
-  const [myBirthday, setMyBirthday] = useState<string>("");
-  const [partnerBirthday, setPartnerBirthday] = useState<string>("");
+  const [anniversary, setAnniversary] = useState<Date | undefined>(undefined);
+  const [myBirthday, setMyBirthday] = useState<Date | undefined>(undefined);
+  const [partnerBirthday, setPartnerBirthday] = useState<Date | undefined>(
+    undefined,
+  );
 
   const handleSave = () => {
     if (anniversary) {
-      localStorage.setItem("anniversary", anniversary);
-      localStorage.setItem("myBirthday", myBirthday);
-      localStorage.setItem("partnerBirthday", partnerBirthday);
+      localStorage.setItem("anniversary", anniversary.toISOString());
+      localStorage.setItem("myBirthday", myBirthday?.toISOString() ?? "");
+      localStorage.setItem(
+        "partnerBirthday",
+        partnerBirthday?.toISOString() ?? "",
+      );
     }
   };
 
@@ -28,29 +34,17 @@ export default function AnniversaryInput() {
           <p className="text-[#2D2D2D] font-bold text-[16px]">
             💘 우리의 시작일
           </p>
-          <Input
-            type="date"
-            value={anniversary}
-            onChange={(e) => setAnniversary(e.target.value)}
-            className="w-full pr-10 border-[#7A5CFF] hover:border-[#FF6B81]"
-          />
+          <DateSelectPage date={anniversary} onSelect={setAnniversary} />
           <p className="text-[#2D2D2D] font-bold text-[16px] mt-2">
             🎂 나의 생일
           </p>
-          <Input
-            type="date"
-            value={myBirthday}
-            onChange={(e) => setMyBirthday(e.target.value)}
-            className="w-full pr-10 border-[#7A5CFF] hover:border-[#FF6B81]"
-          />
+          <DateSelectPage date={myBirthday} onSelect={setMyBirthday} />
           <p className="text-[#2D2D2D] font-bold text-[16px] mt-2 ">
             🎂 상대의 생일
           </p>
-          <Input
-            type="date"
-            value={partnerBirthday}
-            onChange={(e) => setPartnerBirthday(e.target.value)}
-            className="w-full pr-10 border-[#7A5CFF] hover:border-[#FF6B81]"
+          <DateSelectPage
+            date={partnerBirthday}
+            onSelect={setPartnerBirthday}
           />
           <Button
             className="text-[#FAFAFA] text-[15px] font-bold  hover:bg-[#FF6B81] bg-[#7A5CFF] mt-2 w-full"

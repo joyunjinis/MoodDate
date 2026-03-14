@@ -18,6 +18,7 @@ interface Props {
 
 export default function PlannerPage({ currentDate }: Props) {
   const [items, setItems] = useState<PlanItem[]>([]);
+  const [planDate, setPlanDate] = useState<Date | undefined>(undefined);
 
   // 불러오기
   useEffect(() => {
@@ -50,12 +51,18 @@ export default function PlannerPage({ currentDate }: Props) {
 
   return (
     <div className="bg-white rounded-2xl border border-gray-200 p-6 flex flex-col gap-4 mt-30 w-110 ml-20">
-      <DateSelectPage />
+      {/* 헤더 */}
+      <div className="text-center">
+        <h1 className="text-2xl font-bold">❤️ 데이트 플랜 ❤️</h1>
+        <DateSelectPage date={planDate} onSelect={setPlanDate} />
+      </div>
       <hr className="mt-1" />
 
+      {/* 입력 폼 */}
       <AddPlacePage onAdd={handleAdd} />
       <hr className="mt-3" />
 
+      {/* 리스트 */}
       <CardListPage items={items} onDelete={handleDelete} onMove={handleMove} />
     </div>
   );

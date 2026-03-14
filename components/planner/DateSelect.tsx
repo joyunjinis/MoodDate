@@ -4,14 +4,14 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 
-import { useState } from "react";
+interface Props {
+  date: Date | undefined;
+  onSelect: (date: Date | undefined) => void;
+}
 
-export default function DateSelectPage() {
-  const [date, setDate] = useState<Date | undefined>(undefined);
-
+export default function DateSelectPage({ date, onSelect }: Props) {
   return (
-    <div className="mt-1 text-center">
-      <h1 className="font-bold text-[#2D2D2D] text-2xl">❤️ 데이트 플랜 ❤️</h1>
+    <div className="mt-1">
       <div className="mt-1">
         <Popover>
           <PopoverTrigger asChild>
@@ -20,7 +20,7 @@ export default function DateSelectPage() {
             </Button>
           </PopoverTrigger>
           <PopoverContent>
-            <Calendar mode="single" selected={date} onSelect={setDate} />
+            <Calendar mode="single" selected={date} onSelect={onSelect} />
           </PopoverContent>
         </Popover>
       </div>
